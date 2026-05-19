@@ -1,0 +1,14 @@
+@import "tailwindcss";
+
+/* Pixel art buttons via box-shadow trick */
+body {
+  font-family: 'Press Start 2P', monospace; /* Google Font */
+  image-rendering: pixelated;
+  border: none;
+  color: white;
+  box-shadow:
+    -4px 0 0 0 #5b21b6,
+     4px 0 0 0 #5b21b6,
+     0 -4px 0 0 #5b21b6,
+     0  4px 0 0 #5b21b6;
+}
