@@ -1,14 +1,35 @@
 @import "tailwindcss";
 
+:root {
+  color-scheme: light;
+  --ctp-latte-rosewater: #dc8a78;
+  --ctp-latte-flamingo: #dd7878;
+  --ctp-latte-pink: #ea76cb;
+  --ctp-latte-mauve: #8839ef;
+  --ctp-latte-text: #4c4f69;
+  --ctp-latte-subtext: #6c6f85;
+  --ctp-latte-surface: #c1dfc0;
+  --ctp-latte-surface-alt: #f8efed;
+  --ctp-latte-border: #dcc8d4;
+  --ctp-latte-soft: #f8e7f0;
+  --color-brown-50: #4B4646;
+  --color-green-50: #f3f8df;
+  --color-green-100: #e6ebd2;
+  --color-green-200: #d0de88;
+  --color-green-300: #b3c16b;
+  --color-green-400: #8e9b46;
+  --color-green-500: #6e7921;
+  --color-green-600: #586200;
+  --color-green-700: #454e00;
+  --color-green-800: #333b00;
+  --color-green-900: #252a00;
+  --color-green-950: #151900;
+}
+
 /* Pixel art buttons via box-shadow trick */
 body {
-  font-family: 'Press Start 2P', monospace; /* Google Font */
-  image-rendering: pixelated;
-  border: none;
-  color: white;
-  box-shadow:
-    -4px 0 0 0 #5b21b6,
-     4px 0 0 0 #5b21b6,
-     0 -4px 0 0 #5b21b6,
-     0  4px 0 0 #5b21b6;
+  font-family: 'chewy', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; /* Google Font */
+  background: var(--color-green-50);
+  color: var(--ctp-latte-text);
+  margin: 0;
 }

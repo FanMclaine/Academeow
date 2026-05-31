@@ -1,44 +1,60 @@
-const difficultyColors = {
-  easy:   'bg-green-900 text-green-300 ',
-  medium: 'bg-yellow-900 text-yellow-300 ',
-  hard:   'bg-red-900 text-red-300 ',
+import { useState } from 'react'
+
+const DIFFICULTY_BORDER = {
+  easy:   'border-l-[#8bc470]',
+  medium: 'border-l-[#9bd1ff]',
+  hard:   'border-l-[#e44e76]',
 }
 
 export default function TaskCard({
-  title = 'Untitled Task',
-  xpReward = 0,
+  title      = 'Untitled Task',
   difficulty = 'easy',
-  done = false,
+  done       = false,
   onComplete,
+  onDelete,
 }) {
-  const badgeColor = difficultyColors[difficulty] || 'bg-gray-800 text-gray-400'
+  const [fading, setFading] = useState(false)
+
+  function handleComplete() {
+    if (done || fading) return
+    setFading(true)
+    setTimeout(() => {
+      onComplete?.()
+    }, 400) // wait for fade then remove
+  }
 
   return (
-    <div className={`rounded-xl p-6 border transition-all duration-300 ${
-      done
-        ? 'bg-gray-900 border-gray-800 opacity-50'
-        : 'bg-gray-800 border-gray-700 hover:border-gray-500'
-    }`}>
-      <div className="flex justify-between items-start mb-4">
-        <h3 className={`text-base font-semibold ${done ? 'line-through text-gray-500' : 'text-white'}`}>
+    <div className={`
+      transition-all duration-300
+      ${fading ? 'opacity-0 translate-x-4' : 'opacity-100 translate-x-0'}
+    `}>
+      {/* <div className={`
+        flex items-center justify-between
+        bg-[#fdf8f0] rounded-2xl px-4 py-3
+        border-l-4 border border-[#e8dcc8]
+        shadow-sm
+        ${DIFFICULTY_BORDER[difficulty]}
+      `}> */}
+      <div data-layer="Rectangle 3" className={`
+        my-1 flex items-center justify-between px-5 py-4 bg-green-100 rounded-[15px] shadow-xl shadow-inset-card border-l-[20px] ${DIFFICULTY_BORDER[difficulty]}
+      `}>
+        <span className="text-base font-medium text-[#3d2c1e] flex-1 pr-4">
           {title}
-        </h3>
-        <span className={`px-3 py-1 rounded-full text-xs font-medium capitalize ${badgeColor}`}>
-          {difficulty}
         </span>
-      </div>
-      <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-purple-400">+{xpReward} XP</span>
+
         <button
-          onClick={onComplete}
-          disabled={done}
-          className={`px-4 py-1.5 rounded-lg text-sm font-medium transition-colors ${
-            done
-              ? 'bg-gray-700 text-gray-500 cursor-not-allowed'
-              : 'bg-purple-600 hover:bg-purple-500 text-white cursor-pointer'
-          }`}
+          onClick={handleComplete}
+          disabled={done || fading}
+          className={`
+            w-8 h-5 rounded-full border-5 outline-3 shadow-inset-toggle outline-[#4B4646] transition-all duration-200
+            flex items-center justify-center
+            ${done
+              ? 'bg-[#4caf50] border-[#388e3c]'
+              : 'bg-[#E2F0E4] border-[#E2F0E4] active:scale-90'
+            }
+          `}
         >
-          {done ? 'Done!' : 'Complete'}
+          {done && <span className="text-white text-xs">✓</span>}
         </button>
       </div>
     </div>
